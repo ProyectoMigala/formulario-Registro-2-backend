@@ -2,7 +2,7 @@
 Este es el Backend para el proyecto [formulario-Registro-2](https://github.com/ProyectoMigalaOficial/formulario-Registro-2) 
 
 ## Pre-Requisitos Configuraciones
-- Crear un Service Account de Google para Google Sheets https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
+- Crear un [Service Account](https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication) de Google para Google Sheets
 - Guardar el `json` en la carpeta `keys`
 - Crear un Google Sheet y compartirlo con el Service Account que acabas de crear
 - Renombra `.env.example` a `.env` y actualiza las variables con tus datos
