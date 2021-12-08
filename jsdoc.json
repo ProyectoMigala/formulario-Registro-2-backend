@@ -1,0 +1,64 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "source": {
+        "include": [
+            "src",
+            "bin",
+            "./app.js",
+            "./README.md"
+        ],
+        "includePattern": "\\.js$",
+        "excludePattern": "(node_modules|doc|docs|.env)"
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true
+    },
+    "opts": {
+        "template": "node_modules/docdash",
+        "encoding": "utf8",
+        "verbose": true,
+        "recurse": true,
+        "destination": "./documentation/www"
+    },
+    "docdash": {
+        "openGraph": { 
+            "title": "Migala",
+            "type": "website",
+            "image": "",
+            "site_name": "",
+            "url": ""
+        },
+        "meta": { 
+            "title": "Migala",
+            "description": "",
+            "keyword": ""
+        },
+        "search": true,
+        "menu": {
+            "Github Repo": {
+                "href":"https://github.com/ProyectoMigalaOficial",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"gh_link"
+            },
+            "Discord": {
+                "href":"https://discord.gg/2s2dRtsw",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"discord_link"
+            },
+            "Postman": {
+                "href":"https://documenter.getpostman.com/view/2442145/UVJk9shC",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"postman_link"
+            }
+        }
+    }
+}
