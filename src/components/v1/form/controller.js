@@ -106,7 +106,7 @@ router.post('/', async (req, res) => {
     return
   }
 
-  if (obj.rows.length <= 0) {
+  if (obj.rows === undefined || obj.rows.length <= 0) {
     res.status(400).json({ msg: 'Empty rows' })
     return
   }
