@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>utils - Migala</title>
+    
+    
+    
+    
+    
+    <meta property="og:title" content="Migala"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content=""/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/ProyectoMigalaOficial" target="_blank" class="menu-item" id="gh_link" >Github Repo</a></h2><h2><a href="https://discord.gg/2s2dRtsw" target="_blank" class="menu-item" id="discord_link" >Discord</a></h2><h2><a href="https://documenter.getpostman.com/view/2442145/UVJk9shC" target="_blank" class="menu-item" id="postman_link" >Postman</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-components.html">components</a></li><li><a href="module-components_form.html">components/form</a><ul class='methods'><li data-type='method'><a href="module-components_form.html#~GET/api/v1/form/">GET /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~getAll">getAll</a></li><li data-type='method'><a href="module-components_form.html#~getNewRows">getNewRows</a></li><li data-type='method'><a href="module-components_form.html#~getRows">getRows</a></li><li data-type='method'><a href="module-components_form.html#~POST/api/v1/form/">POST /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~save">save</a></li></ul></li><li></li><li></li><li><a href="module-services_google.html">services/google</a><ul class='methods'><li data-type='method'><a href="module-services_google.html#~getInstance">getInstance</a></li></ul></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~handleError">handleError</a></li><li data-type='method'><a href="module-utils.html#~handleFatalError">handleFatalError</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">utils</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><p>Es el archivo donde estan las utilerias genericas de la aplicacion</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~handleError"><span class="type-signature">(inner) </span>handleError<span class="signature">(err)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Es un handler error
+Esta funcion sno detiene el proceso de la aplicacion, pero si impime el error,
+esta diseñado para los errores de los cuales la app puede recuperarse, error en validaciones, en respuesta de una peticion, etc</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ERROR</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Es el error generado en la excepcion</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~handleFatalError"><span class="type-signature">(inner) </span>handleFatalError<span class="signature">(err)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Es un handler error
+En esta funcion se detiene el proceso de la aplicacion he impime el error,
+esta diseñado para los errores fatales de los cuales la app no se puede recuperar</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ERROR</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Es el error generado en la excepcion</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Wed Dec 08 2021 04:23:45 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
