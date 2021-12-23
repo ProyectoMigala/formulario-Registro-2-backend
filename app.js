@@ -10,6 +10,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors');
 const bodyParser = require('body-parser')
 
 /**
@@ -19,6 +20,15 @@ const { handleFatalError } = require('./src/utils/utils')
 
 process.on('uncaughtException', handleFatalError)
 process.on('unhandledRejection', handleFatalError)
+
+/**
+ * Configuración de CORS
+ */
+const allowedOrigins = [process.env.ALLOWED_ORIGIN];
+const options = {
+    origin: allowedOrigins
+}
+app.use(cors(options))
 
 /**
  * Aqui va el contendio estatico de la aplicacion
