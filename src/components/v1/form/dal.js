@@ -115,7 +115,7 @@ async function getRows(sheet) {
  * @returns {Array} Regresa un arreglo de objetos, cada objeto es un registro de la tabla sheet
  * @example
  * await sheet.addRows(rows)
- * const response = await getNewRows(sheet)
+ * const response = await getNewRows(sheet, rows.length)
  */
 async function getNewRows(sheet, size) {
   const rows = await sheet.getRows()
