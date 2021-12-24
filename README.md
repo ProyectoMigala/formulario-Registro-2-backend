@@ -5,6 +5,7 @@ Este es el Backend para el proyecto [formulario-Registro-2](https://github.com/P
 - Crear un [Service Account](https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication) de Google para Google Sheets
 - Guardar el `json` en la carpeta `keys`
 - Crear un Google Sheet y compartirlo con el Service Account que acabas de crear
+- Configura tu email, si no tienes alguno disponible y es solo para desarrollo, puedes usar [https://ethereal.email/](https://ethereal.email/)
 - Renombra `.env.example` a `.env` y actualiza las variables con tus datos
 
 ## Pre-Requsitos Ejecucion
