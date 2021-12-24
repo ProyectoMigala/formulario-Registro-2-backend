@@ -38,7 +38,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/ProyectoMigalaOficial" target="_blank" class="menu-item" id="gh_link" >Github Repo</a></h2><h2><a href="https://discord.gg/2s2dRtsw" target="_blank" class="menu-item" id="discord_link" >Discord</a></h2><h2><a href="https://documenter.getpostman.com/view/2442145/UVJk9shC" target="_blank" class="menu-item" id="postman_link" >Postman</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-components.html">components</a></li><li><a href="module-components_form.html">components/form</a><ul class='methods'><li data-type='method'><a href="module-components_form.html#~GET/api/v1/form/">GET /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~getAll">getAll</a></li><li data-type='method'><a href="module-components_form.html#~getNewRows">getNewRows</a></li><li data-type='method'><a href="module-components_form.html#~getRows">getRows</a></li><li data-type='method'><a href="module-components_form.html#~POST/api/v1/form/">POST /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~save">save</a></li></ul></li><li></li><li></li><li><a href="module-services_google.html">services/google</a><ul class='methods'><li data-type='method'><a href="module-services_google.html#~getInstance">getInstance</a></li></ul></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~handleError">handleError</a></li><li data-type='method'><a href="module-utils.html#~handleFatalError">handleFatalError</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/ProyectoMigalaOficial" target="_blank" class="menu-item" id="gh_link" >Github Repo</a></h2><h2><a href="https://discord.gg/2s2dRtsw" target="_blank" class="menu-item" id="discord_link" >Discord</a></h2><h2><a href="https://documenter.getpostman.com/view/2442145/UVJk9shC" target="_blank" class="menu-item" id="postman_link" >Postman</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-components.html">components</a></li><li><a href="module-components_form.html">components/form</a><ul class='methods'><li data-type='method'><a href="module-components_form.html#~GET/api/v1/form/">GET /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~getAll">getAll</a></li><li data-type='method'><a href="module-components_form.html#~getNewRows">getNewRows</a></li><li data-type='method'><a href="module-components_form.html#~getRows">getRows</a></li><li data-type='method'><a href="module-components_form.html#~POST/api/v1/form/">POST /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~save">save</a></li></ul></li><li></li><li></li><li><a href="module-services_google.html">services/google</a><ul class='methods'><li data-type='method'><a href="module-services_google.html#~getInstance">getInstance</a></li></ul></li><li><a href="module-services_nodemailer.html">services/nodemailer</a><ul class='methods'><li data-type='method'><a href="module-services_nodemailer.html#~sendEmail">sendEmail</a></li><li data-type='method'><a href="module-services_nodemailer.html#~sendWelcomeEmail">sendWelcomeEmail</a></li></ul></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~handleError">handleError</a></li><li data-type='method'><a href="module-utils.html#~handleFatalError">handleFatalError</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -61,6 +61,7 @@
 
 const router = require('express').Router()
 const dal = require('./dal')
+const nodemailer = require('../../../services/nodemailer')
 
 /**
  * Retorna una lista de todos los registros de una tabla (sheet)
@@ -124,21 +125,22 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados
+ * Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados, tambien manda email al usuario
+ * procura usar estos campos { email, name } (esto puede cambiar, es solo de momento)
  * 
  * Necesitas el nombre de la tabla, y los registros a guardar, se pasan en el body del POST, ejemplo:
  * @function POST /api/v1/form/
  * @example
  * curl -X POST http://localhost:3000/api/v1/form
  *  -H 'Content-Type: application/json'
- *  -d '{"tableName":"example_table","rows":[{"name":"example","lastName":"example","phone":"31231231"}]}'
+ *  -d '{"tableName":"example_table","rows":[{"name":"example","email":"example@email.com","phone":"31231231"}]}'
  * 
  *  HTTP/1.1 200 OK
  *  {
  *    "result": [
  *      {
  *        "name": "example",
- *        "lastName": "example",
+ *        "email": "example@email.com",
  *        "phone": "31231231"
  *      }
  *    ]
@@ -161,12 +163,22 @@ router.post('/', async (req, res) => {
     return
   }
 
-  if (obj.rows.length &lt;= 0) {
+  if (obj.rows === undefined || obj.rows.length &lt;= 0) {
     res.status(400).json({ msg: 'Empty rows' })
     return
   }
 
   const result = await dal.save(obj)
+
+  for (const row of result) {
+    nodemailer.sendWelcomeEmail({
+      to: row.email,
+      context: {
+        name: row.name,
+        company: 'Migala'
+      }
+    })
+  }
 
   res.json({ result })
 })
@@ -186,7 +198,7 @@ module.exports = router
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Wed Dec 08 2021 04:32:36 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Dec 24 2021 04:31:11 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

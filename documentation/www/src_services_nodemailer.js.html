@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Migala</title>
+    <title>src/services/nodemailer.js - Migala</title>
     
     
     
@@ -43,109 +43,119 @@
 
 <div id="main">
     
+    <h1 class="page-title">src/services/nodemailer.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+/**
+ @fileOverview Es el archivo principal para mandar emails.
+ @module services/nodemailer
+ */
+const hbs = require('nodemailer-express-handlebars')
+const nodemailer = require('nodemailer')
 
+/**
+ * Inicializa el servicio de nodemailer
+ */
+let transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+})
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * Cargamos la ruta de los templates
+ */
+const handlebarOptions = {
+  viewEngine: {
+    partialsDir: `${process.cwd()}/templates/emails`,
+    defaultLayout: false,
+  },
+  viewPath: `${process.cwd()}/templates/emails`,
+}
+
+/**
+ * Agregamos el handlebars al compile de nodemailer
+ */
+transporter.use('compile', hbs(handlebarOptions))
+
+/**
+ * Funcion privada para mandar emails
+ * @async
+ * @function sendEmail
+ * @param {opts} opts -  Es el objeto que contiene las opciones/argumentos
+ * @example
+ *  const mailOptions = {
+ *    from: '"Migala" &lt;no-reply@migala.mx>',
+ *    to: 'example@email.com',
+ *    subject: 'Bienvenido!',
+ *    template: 'email',
+ *    context: {
+ *      name: 'Example',
+ *      company: 'Company Name'
+ *    }
+ *  }
+ *  sendEmail(mailOptions)
+ */
+async function sendEmail(opts) {
+  const mailOptions = {
+    from: opts.from,
+    to: opts.to,
+    subject: opts.subject,
+    template: opts.template,
+    context: opts.context
+  }
+
+  let info = undefined
+  try {
+    info = await transporter.sendMail(mailOptions)
+  } catch (error) {
+    console.log(error)
+    return
+  }
+
+  console.log("Message sent: %s", info.messageId)
+}
+
+/**
+ * Funcion publica para mandar emails con el template de Bienvenida
+ * @async
+ * @function sendWelcomeEmail
+ * @param {opts} opts -  Es el objeto que contiene las opciones/argumentos
+ * @example
+ *  const mailOptions = {
+ *    to: 'example@email.com',
+ *    context: {
+ *      name: 'Example',
+ *      company: 'Migala'
+ *    }
+ *  }
+ *  sendEmail(mailOptions)
+ */
+exports.sendWelcomeEmail = async (opts) => {
+  const mailOptions = {
+    from: '"Migala" &lt;no-reply@migala.mx>',
+    to: opts.to,
+    subject: 'Bienvenido!',
+    template: 'email',
+    context: opts.context
+  }
+
+  sendEmail(mailOptions)
+}
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><h1>Migala Form</h1>
-<p>Este es el Backend para el proyecto <a href="https://github.com/ProyectoMigalaOficial/formulario-Registro-2">formulario-Registro-2</a></p>
-<h2>Pre-Requisitos Configuraciones</h2>
-<ul>
-<li>Crear un <a href="https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication">Service Account</a> de Google para Google Sheets</li>
-<li>Guardar el <code>json</code> en la carpeta <code>keys</code></li>
-<li>Crear un Google Sheet y compartirlo con el Service Account que acabas de crear</li>
-<li>Renombra <code>.env.example</code> a <code>.env</code> y actualiza las variables con tus datos</li>
-</ul>
-<h2>Pre-Requsitos Ejecucion</h2>
-<ul>
-<li>Tener Docker (Docker version 20.10.10, build b485636) y/o docker-compose (docker-compose version 1.29.2, build 5becea4c)</li>
-</ul>
-<p>o</p>
-<ul>
-<li>nodejs (v16.13.1)</li>
-</ul>
-<h2>Instalar Dependencias</h2>
-<p>Use the package manager <a href="https://nodejs.org/en/">npm</a> to install the dependencies.</p>
-<pre class="prettyprint source lang-bash"><code>npm install 
-</code></pre>
-<h2>Comandos de uso</h2>
-<pre class="prettyprint source lang-bash"><code># iniciar el server
-npm run start 
-
-# iniciar el server de desarrollo
-npm run dev
-
-# crear documentacion
-npm run docs
-</code></pre>
-<h2>Docker</h2>
-<p>Puedes usar <a href="https://docs.docker.com/get-docker/">Docker</a> y/o <a href="https://docs.docker.com/compose/install/">docker-compose</a> para correr el proyecto.</p>
-<h3>Desarrollo con docker compose</h3>
-<p>Con <code>docker-compose</code> (docker-compose es una herramienta dependiente de Docker). En la raíz del proyecto puedes correr:</p>
-<pre class="prettyprint source lang-sh"><code>docker-compose up
-</code></pre>
-<p>con Docker. En la raíz del proyecto puedes correr:</p>
-<pre class="prettyprint source lang-sh"><code>docker build -t migala-form-back -f Dockerfile .
-</code></pre>
-<h2>Documentation</h2>
-<p>Checka la documentacion en la ruta <code>/doc</code> y/o en <a href="https://documenter.getpostman.com/view/2442145/UVJk9shC#691573b6-d763-4852-bef8-ffddea31a556">postman</a></p>
-<h2>Estructura del proyecto</h2>
-<pre class="prettyprint source lang-text"><code>.
-|-- Dockerfile
-|-- README.md
-|-- app.js
-|-- bin
-|   \-- www
-|-- docker-compose.yml
-|-- documentation
-|   |-- documents
-|   \-- www - `GENERADO AUTOMATICAMENTE CON 'npm run docs'`
-|-- jsdoc.json
-|-- keys
-|   \-- service_account_json.json.example
-|-- node_modules
-|-- package-lock.json
-|-- package.json
-|-- public
-|   \-- index.html
-\-- src
-    |-- components
-    |   |-- v1
-    |   |   |-- form
-    |   |   |   |-- controller.js
-    |   |   |   |-- dal.js
-    |   |   |   \-- index.js
-    |   |   \-- index.js
-    |   \-- v2
-    |-- services
-    |   \-- google_sheet.js
-    \-- utils
-        \-- utils.js
-</code></pre></article>
-    </section>
-
-
 
 
 

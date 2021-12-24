@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>utils - Migala</title>
+    <title>services/nodemailer - Migala</title>
     
     
     
@@ -43,7 +43,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">utils</h1>
+    <h1 class="page-title">services/nodemailer</h1>
     
 
     
@@ -66,7 +66,7 @@
         <div class="container-overview">
         
             
-                <div class="description usertext"><p>Es el archivo donde estan las utilerias genericas de la aplicacion</p></div>
+                <div class="description usertext"><p>Es el archivo principal para mandar emails.</p></div>
             
 
             
@@ -80,7 +80,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line2">line 2</a>
+        <a href="src_services_nodemailer.js.html">src/services/nodemailer.js</a>, <a href="src_services_nodemailer.js.html#line2">line 2</a>
     </li></ul></dd>
     
 
@@ -164,18 +164,12 @@
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
+<h4 class="name" id="~handlebarOptions"><span class="type-signature">(inner, constant) </span>handlebarOptions<span class="type-signature"></span></h4>
 
-    
-
-    <h4 class="name" id="~handleError"><span class="type-signature">(inner) </span>handleError<span class="signature">(err)</span><span class="type-signature"></span></h4>
-
-    
 
 
 
@@ -185,7 +179,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line21">line 21</a>
+        <a href="src_services_nodemailer.js.html">src/services/nodemailer.js</a>, <a href="src_services_nodemailer.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -225,9 +219,7 @@
 
 
 <div class="description usertext">
-    <p>Es un handler error
-Esta funcion sno detiene el proceso de la aplicacion, pero si impime el error,
-esta diseñado para los errores de los cuales la app puede recuperarse, error en validaciones, en respuesta de una peticion, etc</p>
+    <p>Cargamos la ruta de los templates</p>
 </div>
 
 
@@ -236,6 +228,147 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
 
 
 
+
+        
+            
+<h4 class="name" id="~transporter"><span class="type-signature">(inner) </span>transporter<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_services_nodemailer.js.html">src/services/nodemailer.js</a>, <a href="src_services_nodemailer.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Inicializa el servicio de nodemailer</p>
+</div>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~sendEmail"><span class="type-signature">(async, inner) </span>sendEmail<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_services_nodemailer.js.html">src/services/nodemailer.js</a>, <a href="src_services_nodemailer.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Funcion privada para mandar emails</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const mailOptions = {   from: '"Migala" &lt;no-reply@migala.mx>',   to: 'example@email.com',   subject: 'Bienvenido!',   template: 'email',   context: {     name: 'Example',     company: 'Company Name'   } } sendEmail(mailOptions)</code></pre>
 
 
 
@@ -265,13 +398,13 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
 
         <tr>
             
-                <td class="name"><code>err</code></td>
+                <td class="name"><code>opts</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">ERROR</span>
+<span class="param-type">opts</span>
 
 
             
@@ -281,7 +414,7 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
 
             
 
-            <td class="description last"><p>Es el error generado en la excepcion</p></td>
+            <td class="description last"><p>Es el objeto que contiene las opciones/argumentos</p></td>
         </tr>
 
     
@@ -311,7 +444,7 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
 
     
 
-    <h4 class="name" id="~handleFatalError"><span class="type-signature">(inner) </span>handleFatalError<span class="signature">(err)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~sendWelcomeEmail"><span class="type-signature">(async, inner) </span>sendWelcomeEmail<span class="signature">(opts)</span><span class="type-signature"></span></h4>
 
     
 
@@ -323,7 +456,7 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_utils_utils.js.html">src/utils/utils.js</a>, <a href="src_utils_utils.js.html#line8">line 8</a>
+        <a href="src_services_nodemailer.js.html">src/services/nodemailer.js</a>, <a href="src_services_nodemailer.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -363,9 +496,7 @@ esta diseñado para los errores de los cuales la app puede recuperarse, error en
 
 
 <div class="description usertext">
-    <p>Es un handler error
-En esta funcion se detiene el proceso de la aplicacion he impime el error,
-esta diseñado para los errores fatales de los cuales la app no se puede recuperar</p>
+    <p>Funcion publica para mandar emails con el template de Bienvenida</p>
 </div>
 
 
@@ -374,6 +505,11 @@ esta diseñado para los errores fatales de los cuales la app no se puede recuper
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const mailOptions = {   to: 'example@email.com',   context: {     name: 'Example',     company: 'Migala'   } } sendEmail(mailOptions)</code></pre>
 
 
 
@@ -403,13 +539,13 @@ esta diseñado para los errores fatales de los cuales la app no se puede recuper
 
         <tr>
             
-                <td class="name"><code>err</code></td>
+                <td class="name"><code>opts</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">ERROR</span>
+<span class="param-type">opts</span>
 
 
             
@@ -419,7 +555,7 @@ esta diseñado para los errores fatales de los cuales la app no se puede recuper
 
             
 
-            <td class="description last"><p>Es el error generado en la excepcion</p></td>
+            <td class="description last"><p>Es el objeto que contiene las opciones/argumentos</p></td>
         </tr>
 
     

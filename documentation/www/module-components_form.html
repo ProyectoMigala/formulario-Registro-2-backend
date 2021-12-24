@@ -38,7 +38,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/ProyectoMigalaOficial" target="_blank" class="menu-item" id="gh_link" >Github Repo</a></h2><h2><a href="https://discord.gg/2s2dRtsw" target="_blank" class="menu-item" id="discord_link" >Discord</a></h2><h2><a href="https://documenter.getpostman.com/view/2442145/UVJk9shC" target="_blank" class="menu-item" id="postman_link" >Postman</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-components.html">components</a></li><li><a href="module-components_form.html">components/form</a><ul class='methods'><li data-type='method'><a href="module-components_form.html#~GET/api/v1/form/">GET /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~getAll">getAll</a></li><li data-type='method'><a href="module-components_form.html#~getNewRows">getNewRows</a></li><li data-type='method'><a href="module-components_form.html#~getRows">getRows</a></li><li data-type='method'><a href="module-components_form.html#~POST/api/v1/form/">POST /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~save">save</a></li></ul></li><li></li><li></li><li><a href="module-services_google.html">services/google</a><ul class='methods'><li data-type='method'><a href="module-services_google.html#~getInstance">getInstance</a></li></ul></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~handleError">handleError</a></li><li data-type='method'><a href="module-utils.html#~handleFatalError">handleFatalError</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/ProyectoMigalaOficial" target="_blank" class="menu-item" id="gh_link" >Github Repo</a></h2><h2><a href="https://discord.gg/2s2dRtsw" target="_blank" class="menu-item" id="discord_link" >Discord</a></h2><h2><a href="https://documenter.getpostman.com/view/2442145/UVJk9shC" target="_blank" class="menu-item" id="postman_link" >Postman</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-components.html">components</a></li><li><a href="module-components_form.html">components/form</a><ul class='methods'><li data-type='method'><a href="module-components_form.html#~GET/api/v1/form/">GET /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~getAll">getAll</a></li><li data-type='method'><a href="module-components_form.html#~getNewRows">getNewRows</a></li><li data-type='method'><a href="module-components_form.html#~getRows">getRows</a></li><li data-type='method'><a href="module-components_form.html#~POST/api/v1/form/">POST /api/v1/form/</a></li><li data-type='method'><a href="module-components_form.html#~save">save</a></li></ul></li><li></li><li></li><li><a href="module-services_google.html">services/google</a><ul class='methods'><li data-type='method'><a href="module-services_google.html#~getInstance">getInstance</a></li></ul></li><li><a href="module-services_nodemailer.html">services/nodemailer</a><ul class='methods'><li data-type='method'><a href="module-services_nodemailer.html#~sendEmail">sendEmail</a></li><li data-type='method'><a href="module-services_nodemailer.html#~sendWelcomeEmail">sendWelcomeEmail</a></li></ul></li><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~handleError">handleError</a></li><li data-type='method'><a href="module-utils.html#~handleFatalError">handleFatalError</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -432,7 +432,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line10">line 10</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -793,7 +793,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet)</code></pre>
+    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet, rows.length)</code></pre>
 
 
 
@@ -1089,7 +1089,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line71">line 71</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -1129,7 +1129,8 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
 
 <div class="description usertext">
-    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados</p>
+    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados, tambien manda email al usuario
+procura usar estos campos { email, name } (esto puede cambiar, es solo de momento)</p>
 <p>Necesitas el nombre de la tabla, y los registros a guardar, se pasan en el body del POST, ejemplo:</p>
 </div>
 
@@ -1143,7 +1144,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","lastName":"example","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "lastName": "example",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
+    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","email":"example@email.com","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "email": "example@email.com",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
 
 
 
@@ -1799,7 +1800,7 @@ Necesita el nombre de la tabla y los objetos que se quieren guardar en la tabla,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line10">line 10</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -2160,7 +2161,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet)</code></pre>
+    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet, rows.length)</code></pre>
 
 
 
@@ -2456,7 +2457,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line71">line 71</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -2496,7 +2497,8 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
 
 <div class="description usertext">
-    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados</p>
+    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados, tambien manda email al usuario
+procura usar estos campos { email, name } (esto puede cambiar, es solo de momento)</p>
 <p>Necesitas el nombre de la tabla, y los registros a guardar, se pasan en el body del POST, ejemplo:</p>
 </div>
 
@@ -2510,7 +2512,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","lastName":"example","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "lastName": "example",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
+    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","email":"example@email.com","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "email": "example@email.com",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
 
 
 
@@ -3166,7 +3168,7 @@ Necesita el nombre de la tabla y los objetos que se quieren guardar en la tabla,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line10">line 10</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -3527,7 +3529,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet)</code></pre>
+    <pre class="prettyprint"><code>await sheet.addRows(rows)const response = await getNewRows(sheet, rows.length)</code></pre>
 
 
 
@@ -3823,7 +3825,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line71">line 71</a>
+        <a href="src_components_v1_form_controller.js.html">src/components/v1/form/controller.js</a>, <a href="src_components_v1_form_controller.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -3863,7 +3865,8 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
 
 <div class="description usertext">
-    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados</p>
+    <p>Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados, tambien manda email al usuario
+procura usar estos campos { email, name } (esto puede cambiar, es solo de momento)</p>
 <p>Necesitas el nombre de la tabla, y los registros a guardar, se pasan en el body del POST, ejemplo:</p>
 </div>
 
@@ -3877,7 +3880,7 @@ Necesita el nombre de la tabla, este valor se pasa en el argumento obj, usa el f
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","lastName":"example","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "lastName": "example",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
+    <pre class="prettyprint"><code>curl -X POST http://localhost:3000/api/v1/form -H 'Content-Type: application/json' -d '{"tableName":"example_table","rows":[{"name":"example","email":"example@email.com","phone":"31231231"}]}' HTTP/1.1 200 OK {   "result": [     {       "name": "example",       "email": "example@email.com",       "phone": "31231231"     }   ] } HTTP/1.1 400 Bad Request {   "msg": "Empty &lt;something>" }</code></pre>
 
 
 
@@ -4156,7 +4159,7 @@ Necesita el nombre de la tabla y los objetos que se quieren guardar en la tabla,
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Wed Dec 08 2021 04:32:36 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Dec 24 2021 04:31:12 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
