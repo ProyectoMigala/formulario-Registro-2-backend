@@ -10,7 +10,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const cors = require('cors');
+const cors = require('cors')
 const bodyParser = require('body-parser')
 
 /**
@@ -24,9 +24,9 @@ process.on('unhandledRejection', handleFatalError)
 /**
  * Configuración de CORS
  */
-const allowedOrigins = [process.env.ALLOWED_ORIGIN];
+const allowedOrigins = [process.env.ALLOWED_ORIGIN]
 const options = {
-    origin: allowedOrigins
+  origin: allowedOrigins
 }
 app.use(cors(options))
 
