@@ -6,6 +6,7 @@
 
 const router = require('express').Router()
 const dal = require('./dal')
+const nodemailer = require('../../../services/nodemailer')
 
 /**
  * Retorna una lista de todos los registros de una tabla (sheet)
@@ -69,21 +70,22 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados
+ * Guarda los registros mandados en el post en una tabla (sheet) y regresa los registros guardados, tambien manda email al usuario
+ * procura usar estos campos { email, name } (esto puede cambiar, es solo de momento)
  * 
  * Necesitas el nombre de la tabla, y los registros a guardar, se pasan en el body del POST, ejemplo:
  * @function POST /api/v1/form/
  * @example
  * curl -X POST http://localhost:3000/api/v1/form
  *  -H 'Content-Type: application/json'
- *  -d '{"tableName":"example_table","rows":[{"name":"example","lastName":"example","phone":"31231231"}]}'
+ *  -d '{"tableName":"example_table","rows":[{"name":"example","email":"example@email.com","phone":"31231231"}]}'
  * 
  *  HTTP/1.1 200 OK
  *  {
  *    "result": [
  *      {
  *        "name": "example",
- *        "lastName": "example",
+ *        "email": "example@email.com",
  *        "phone": "31231231"
  *      }
  *    ]
@@ -112,6 +114,16 @@ router.post('/', async (req, res) => {
   }
 
   const result = await dal.save(obj)
+
+  for (const row of result) {
+    nodemailer.sendWelcomeEmail({
+      to: row.email,
+      context: {
+        name: row.name,
+        company: 'Migala'
+      }
+    })
+  }
 
   res.json({ result })
 })
