@@ -24,7 +24,14 @@ process.on('unhandledRejection', handleFatalError)
 /**
  * Configuración de CORS
  */
-const allowedOrigins = [process.env.ALLOWED_ORIGIN]
+let allowedOrigins = undefined
+
+if (process.env.ALLOWED_ORIGIN.includes(',')) {
+  allowedOrigins = process.env.ALLOWED_ORIGIN.split(',')
+} else {
+  allowedOrigins = [process.env.ALLOWED_ORIGIN]
+}
+
 const options = {
   origin: allowedOrigins
 }
