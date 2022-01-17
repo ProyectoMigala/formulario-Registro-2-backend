@@ -119,8 +119,7 @@ router.post('/', async (req, res) => {
     nodemailer.sendWelcomeEmail({
       to: row.email,
       context: {
-        name: row.name,
-        company: 'Migala'
+        name: row.name
       }
     })
   }
