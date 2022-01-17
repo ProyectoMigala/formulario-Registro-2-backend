@@ -62,7 +62,7 @@ exports.save = async (obj) => {
 
   let sheet = undefined
   if (google_doc.sheetsByTitle[title] === undefined) {
-    sheet = await google_doc.addSheet({ title, headerValues })
+    sheet = await google_doc.addSheet({ title, headerValues, gridProperties: { rowCount: rows.length, columnCount: headerValues.length } })
   } else {
     sheet = google_doc.sheetsByTitle[title]
   }
