@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "optionalDependencies": {
-    "pm2": "^5.1.2"
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
     "docdash": "^1.2.0",
