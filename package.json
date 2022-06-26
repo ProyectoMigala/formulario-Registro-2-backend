@@ -19,7 +19,7 @@
   "devDependencies": {
     "docdash": "^1.2.0",
     "jsdoc": "^3.6.10",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.18"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
