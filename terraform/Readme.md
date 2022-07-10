@@ -62,8 +62,8 @@ ssh -i ./spot.io/MigalaFormularioBackend.pem ubuntu@public_ip
 
 ```
 
-Cosas que hacer:
+# Cosas por hacer:
 - tienes que actualizar los `dns` de tu dominio con los nuevos de `route53`
 - asegurate que en los `records` de `route53` solo esta la `ip publica` de tu instancia
-- hacer (`Pre-Requisitos Configuraciones`)[https://github.com/ProyectoMigala/formulario-Registro-2-backend#pre-requisitos-configuraciones] dentro del servidor, configurar el `.env`, las `keys` de drive
+- hacer [`Pre-Requisitos Configuraciones`](https://github.com/ProyectoMigala/formulario-Registro-2-backend#pre-requisitos-configuraciones) dentro del servidor, configurar el `.env`, las `keys` de drive
 
