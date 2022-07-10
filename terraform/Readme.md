@@ -52,7 +52,7 @@ make fmt platform=spot.io
 make providers platform=spot.io
 ```
 
-## Despues de haber levantado toda la infraestructura
+## Como conectarse a la insinstancia por ssh
 
 Al tener la infraestructura, puedes conectarte con `ssh`, el archivo `MigalaFormularioBackend.pem` esta dentro de la carpeta `spot.io`, la `ip` de la instancia la tienes que conseguir de `aws` o `spot.io` (ip publica)
 
@@ -62,7 +62,8 @@ ssh -i ./spot.io/MigalaFormularioBackend.pem ubuntu@public_ip
 
 ```
 
-# Cosas por hacer:
+# Cosas que tienes que hacer despues de implementar la infraestructura
+
 - tienes que actualizar los `dns` de tu dominio con los nuevos de `route53`
 - asegurate que en los `records` de `route53` solo esta la `ip publica` de tu instancia
 - hacer [`Pre-Requisitos Configuraciones`](https://github.com/ProyectoMigala/formulario-Registro-2-backend#pre-requisitos-configuraciones) dentro del servidor, configurar el `.env`, las `keys` de drive
