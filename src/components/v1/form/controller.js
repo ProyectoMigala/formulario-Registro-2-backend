@@ -59,6 +59,9 @@ router.get('/', async (req, res) => {
     return
   }
 
+  res.json({ msg: "nice try! this should work"})
+  return
+
   const result = await dal.getAll(obj)
 
   if (result === undefined) {
