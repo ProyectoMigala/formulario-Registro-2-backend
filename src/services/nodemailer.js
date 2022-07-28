@@ -99,7 +99,7 @@ exports.sendWelcomeEmail = async (opts) => {
   sendEmail(mailOptions)
 }
 
-exports.sendCode = async (opts) => {
+exports.sendPMID = async (opts) => {
   const mailOptions = {
     from: '"Migala" <no-reply@migala.mx>',
     to: opts.to,

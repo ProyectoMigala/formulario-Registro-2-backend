@@ -6,7 +6,7 @@
 
 const router = require('express').Router()
 const dal = require('./dal')
-const nodemailer = require('../../../services/nodemailer')
+const logic = require('./logic')
 
 /**
  * Retorna una lista de todos los registros de una tabla (sheet)
@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
     return
   }
 
-  res.json({ msg: "nice try! this should work"})
+  res.json({ msg: "nice try! this should work" })
   return
 
   const result = await dal.getAll(obj)
@@ -118,15 +118,16 @@ router.post('/', async (req, res) => {
 
   const result = await dal.save(obj)
 
-  for (const row of result) {
-    nodemailer.sendWelcomeEmail({
-      to: row.email,
-      context: {
-        name: row.name
-      }
-    })
+  if (result === undefined || result === null) {
+    res.status(500).json({ msg: 'Internal Server Error' })
+    return
   }
 
+  // create PMID, save PMID, send email
+  console.log('iniciando proceso de creacion de PMID')
+  logic.logic(result)
+
+  console.log('response')
   res.json({ result })
 })
 

@@ -4,6 +4,8 @@
  @module components/form
  */
 const doc = require('../../../services/google_sheet')
+const doc_code = require('../../../services/google_sheet_code')
+const redis_singleton = require('../../../services/redis_singleton')
 
 /**
  * Regresa la lista de registros de una tabla (sheet)
@@ -132,4 +134,27 @@ async function getNewRows(sheet, size) {
   }
 
   return response
+}
+
+exports.savePMID = async (obj) => {
+  const title = obj.tableName
+  const rows = obj.rows
+
+  const headerValues = Object.getOwnPropertyNames(rows[0])
+
+  const google_doc = await doc_code.getInstance({ refresh: true })
+
+  let sheet = undefined
+  if (google_doc.sheetsByTitle[title] === undefined) {
+    sheet = await google_doc.addSheet({ title, headerValues, gridProperties: { rowCount: rows.length, columnCount: headerValues.length } })
+  } else {
+    sheet = google_doc.sheetsByTitle[title]
+  }
+
+  await sheet.addRows(rows)
+}
+
+exports.savePMIDRedis = async (obj) => {
+  const redis = await redis_singleton.getInstance()
+  return await redis.set(obj.key, JSON.stringify(obj.body))
 }
