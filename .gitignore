@@ -206,3 +206,5 @@ $RECYCLE.BIN/
 
 keys/*.json
 DB
+.gitsecret/keys/random_seed
+!*.secret
