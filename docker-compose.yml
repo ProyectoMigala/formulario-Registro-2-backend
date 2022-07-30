@@ -10,3 +10,12 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     command: npm run dev
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel warning
+    volumes: 
+      - ./DB/redis:/data

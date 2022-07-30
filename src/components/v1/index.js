@@ -12,6 +12,12 @@ const form = require('./form')
 router.use('/form', form.controller)
 
 /**
+ * Importando las rutas de la version 1 y la montamos en su respectiva ruta
+ */
+const code = require('./code')
+router.use('/code', code.controller)
+
+/**
  * Exportamos el router que usamos en app.js
  */
 module.exports = router
