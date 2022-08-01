@@ -5,7 +5,7 @@ const parser = require('../../../utils/parser')
 const dal = require('./dal')
 const crypto = require('crypto')
 
-exports.logic = async (list) => {
+exports.logicBackground = async (list) => {
 
   const rows = list.map((row) => {
     const PMID = parser.createPMID({ curp: row.curp })
@@ -28,7 +28,9 @@ exports.logic = async (list) => {
     await dal.savePMID(PMIDobj)
   } catch (err) {
     console.log('Error al guardar PMID en Google Sheets')
+    console.log(PMIDobj)
     console.log(err)
+    return
   }
 
   console.log('iniciando promesa email')
@@ -59,7 +61,7 @@ exports.logic = async (list) => {
       to: row.email,
       context: {
         name: row.name,
-        url: `${process.env.HTTP_PROTOCOL}://${process.env.DOMAIN_NAME}/api/v1/code/${key}`
+        url: `${process.env.HTTP_PROTOCOL}://${process.env.DOMAIN_NAME}/welcome?temptoken=${key}`
       }
     })
   }))

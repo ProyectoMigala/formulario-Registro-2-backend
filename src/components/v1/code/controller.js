@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 const dal = require('./dal')
-const nodemailer = require('../../../services/nodemailer')
+const logic = require('./logic')
 
 router.get('/:uid', async (req, res) => {
 
@@ -19,19 +19,16 @@ router.get('/:uid', async (req, res) => {
 
   const redis_body = JSON.parse(redis_raw_body)
 
+  // response to client
   res.json({ PMID: redis_body.PMID })
 
-  dal.updateStatusPMID({
-    PMID: redis_body.PMID,
-  })
+  let obj = {
+    redis_body,
+    payload
+  }
 
-  nodemailer.sendPMID({
-    to: redis_body.email,
-    context: {
-      PMID: redis_body.PMID,
-      name: redis_body.name
-    }
-  })
+  // delete Redis data, update to validated PMID, send email
+  logic.logicBackground(obj)
 })
 
 module.exports = router

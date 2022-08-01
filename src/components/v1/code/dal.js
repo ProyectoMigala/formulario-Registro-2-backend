@@ -7,6 +7,11 @@ exports.getPMID = async (obj) => {
   return await redis.get(obj.key)
 }
 
+exports.deleteRedisPMID = async (obj) => {
+  const redis = await redis_singleton.getInstance()
+  return await redis.del(obj.key)
+}
+
 exports.updateStatusPMID = async (obj) => {
   const title = 'PMIDs'
 

@@ -123,12 +123,12 @@ router.post('/', async (req, res) => {
     return
   }
 
+  // response to client
+  res.json({ result })
+
   // create PMID, save PMID, send email
   console.log('iniciando proceso de creacion de PMID')
   logic.logic(result)
-
-  console.log('response')
-  res.json({ result })
 })
 
 module.exports = router

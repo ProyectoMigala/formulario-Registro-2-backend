@@ -29,7 +29,7 @@ let allowedOrigins = undefined
 if (process.env.ALLOWED_ORIGIN.includes(',')) {
   allowedOrigins = process.env.ALLOWED_ORIGIN.split(',')
 } else {
-  allowedOrigins = [process.env.ALLOWED_ORIGIN]
+  allowedOrigins = process.env.ALLOWED_ORIGIN
 }
 
 const options = {
@@ -44,6 +44,7 @@ app.use(cors(options))
  */
 const path = require('path')
 app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/welcome', express.static(path.join(__dirname, 'public')))
 app.use('/doc', express.static(path.join(__dirname, 'documentation/www')))
 
 /**
