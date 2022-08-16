@@ -14,6 +14,10 @@ function getRandomLetter() {
   return letters[random]
 }
 
+function getEstadoFromCURP(curp) {
+  return curp.substring(11, 13)
+}
+
 exports.createPMID = (obj) => {
   const curp = obj.curp
   const today = new Date()
@@ -24,7 +28,7 @@ exports.createPMID = (obj) => {
   result = `${result}${curp.substring(0, 4)}`
   result = `${result}${returnTwoDigits((today.getUTCMonth() + 1).toString())}`
   result = `${result}${returnTwoDigits(today.getUTCDate())}`
-  result = `${result}${getRandomLetter()}${getRandomLetter()}${getRandomLetter()}${getRandomLetter()}`
+  result = `${result}${getEstadoFromCURP(curp)}${getRandomLetter()}${getRandomLetter()}`
   
   return result
 }

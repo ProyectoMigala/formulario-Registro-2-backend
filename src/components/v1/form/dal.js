@@ -156,5 +156,13 @@ exports.savePMID = async (obj) => {
 
 exports.savePMIDRedis = async (obj) => {
   const redis = await redis_singleton.getInstance()
-  return await redis.set(obj.key, JSON.stringify(obj.body))
+
+  // 60 seconds
+  // 60 minutes
+  // 24 hours
+  // 7 days
+  // 60 * 60 * 24 * 7 = 604800
+  const expire_in_seven_days = 604800 // 7 days in seconds
+
+  return await redis.set(obj.key, JSON.stringify(obj.body), 'EX', expire_in_seven_days)
 }

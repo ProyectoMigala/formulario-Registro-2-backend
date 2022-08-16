@@ -128,7 +128,7 @@ router.post('/', async (req, res) => {
 
   // create PMID, save PMID, send email
   console.log('iniciando proceso de creacion de PMID')
-  logic.logic(result)
+  logic.logicBackground(result)
 })
 
 module.exports = router
