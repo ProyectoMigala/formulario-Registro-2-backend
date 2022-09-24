@@ -85,7 +85,7 @@ async function sendEmail(opts) {
  */
 exports.sendWelcomeEmail = async (opts) => {
   const mailOptions = {
-    from: '"Migala" <no-reply@proyectomigala.earth>',
+    from: '"ProyectoMigala" <no-reply@proyectomigala.earth>',
     to: opts.to,
     subject: 'Bienvenido!',
     template: 'email',
@@ -97,7 +97,7 @@ exports.sendWelcomeEmail = async (opts) => {
 
 exports.sendPMID = async (opts) => {
   const mailOptions = {
-    from: '"Migala" <no-reply@proyectomigala.earth>',
+    from: '"ProyectoMigala" <no-reply@proyectomigala.earth>',
     to: opts.to,
     subject: 'Tu ID del ProyectoMigala!',
     template: 'confirmation',
